@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './LandingPage.css';
+import arrow from '../assets/arrow.svg';
+import resume from '../assets/resume.pdf';
 
 const LandingPage = () => {
     const [typedText, setTypedText] = useState('');
@@ -55,18 +57,26 @@ const LandingPage = () => {
                             </span>
                         </span>
                     </h1>
+                    <div className="button-container">
+                        <a 
+                            href={resume} 
+                            download="YourName_Resume.pdf"
+                            className="download-btn"
+                            aria-label="Download Resume"
+                        >
+                            Download Resume
+                        </a>
+                    </div>
                     <button 
                         className="scroll-down-btn" 
                         onClick={scrollToNextSection}
                         aria-label="Scroll to About section"
                     >
-                        <span 
+                        <img 
+                            src={arrow}
                             className="scroll-arrow"
-                            role="img" 
-                            aria-label="Scroll down"
-                        >
-                            ↓
-                        </span>
+                            alt="Scroll down"
+                        />
                     </button>
                 </div>
             </div>

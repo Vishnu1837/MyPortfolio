@@ -184,17 +184,15 @@ section {
 /* Add these new styles */
 .scroll-down-btn {
     position: absolute;
-    bottom: 80px;
+    bottom: -14rem;
     left: 50%;
     transform: translateX(-50%);
     cursor: pointer;
-    color: white;
     z-index: 10;
     transition: opacity 0.3s;
-}
-
-.scroll-down-btn:hover {
-    opacity: 0.7;
+    background: transparent;
+    border: none;
+    padding: 0;
 }
 
 /* Make sure hero-section has relative positioning */
@@ -223,10 +221,83 @@ html, body {
 
 /* Add these styles */
 .scroll-arrow {
-    transition: opacity 0.3s;
-    /* Add any additional styling you want for the image */
+    width: 80px;
+    height: 80px;
+    background: transparent;
+    filter: drop-shadow(0 0 8px rgba(203, 71, 210, 0.7))
+            drop-shadow(0 4px 12px rgba(203, 71, 210, 0.4));
+    animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0% {
+        filter: drop-shadow(0 0 8px rgba(203, 71, 210, 0.7))
+                drop-shadow(0 4px 12px rgba(203, 71, 210, 0.4));
+    }
+    50% {
+        filter: drop-shadow(0 0 20px rgba(203, 71, 210, 1))
+                drop-shadow(0 4px 16px rgba(203, 71, 210, 0.6));
+    }
+    100% {
+        filter: drop-shadow(0 0 8px rgba(203, 71, 210, 0.7))
+                drop-shadow(0 4px 12px rgba(203, 71, 210, 0.4));
+    }
 }
 
 .scroll-down-btn:hover .scroll-arrow {
-    opacity: 0.7;
+    animation: glow-hover 1s ease-in-out infinite;
+}
+
+@keyframes glow-hover {
+    0% {
+        filter: drop-shadow(0 0 15px rgba(203, 71, 210, 0.8))
+                drop-shadow(0 6px 16px rgba(203, 71, 210, 0.6));
+    }
+    50% {
+        filter: drop-shadow(0 0 25px rgba(203, 71, 210, 1))
+                drop-shadow(0 6px 20px rgba(203, 71, 210, 0.8));
+    }
+    100% {
+        filter: drop-shadow(0 0 15px rgba(203, 71, 210, 0.8))
+                drop-shadow(0 6px 16px rgba(203, 71, 210, 0.6));
+    }
+}
+
+.button-container {
+    margin-top: 2rem;
+}
+
+.download-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background: linear-gradient(90deg, #cb47d2, #d83975, #e23839);
+    background-size: 200% auto;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: 0 0 15px rgba(203, 71, 210, 0.3);
+}
+
+.download-btn:hover {
+    background-position: right center;
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(203, 71, 210, 0.5);
+}
+
+.download-btn:active {
+    transform: translateY(0);
+}
+
+/* Add media query for mobile responsiveness */
+@media (max-width: 768px) {
+    .download-btn {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
 }
