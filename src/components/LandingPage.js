@@ -10,6 +10,7 @@ const LandingPage = () => {
     const fullText = "a Full Stack Developer";
     const typingSpeed = 100;
     const [isExpanded, setIsExpanded] = useState(false);
+    const [activeProject, setActiveProject] = useState(0);
 
     useEffect(() => {
         let index = 0;
@@ -41,6 +42,10 @@ const LandingPage = () => {
         if (nextSection) {
             nextSection.scrollIntoView({ behavior: 'smooth' });
         }
+    };
+
+    const handleProjectHover = (index) => {
+        setActiveProject(index);
     };
 
     return (
@@ -172,8 +177,56 @@ const LandingPage = () => {
                     </button>
                 </div>
             </section>
-            <section className="projects-section" style={{ background: 'transparent' }}>
-                <h2>Projects</h2>
+            <section className="projects-section">
+                <h2 className="projects-heading">Project Showcase</h2>
+                <div className="project-showcase">
+                    <div className="project-carousel">
+                        <div 
+                            className="project-card"
+                            onMouseEnter={() => handleProjectHover(0)}
+                            onMouseLeave={() => handleProjectHover(null)}
+                        >
+                            <img src={require('../images/project1.png')} alt="Project 1" />
+                            <button 
+                                className="view-all"
+                                onClick={() => {/* Add your action here */}}
+                            >
+                                View All ↗
+                            </button>
+                        </div>
+                        <div 
+                            className="project-card"
+                            onMouseEnter={() => handleProjectHover(1)}
+                            onMouseLeave={() => handleProjectHover(null)}
+                        >
+                            <img src={require('../images/project2.png')} alt="Project 2" />
+                            <button 
+                                className="view-all"
+                                onClick={() => {/* Add your action here */}}
+                            >
+                                View All ↗
+                            </button>
+                        </div>
+                        <div 
+                            className="project-card"
+                            onMouseEnter={() => handleProjectHover(2)}
+                            onMouseLeave={() => handleProjectHover(null)}
+                        >
+                            <img src={require('../images/project3.png')} alt="Project 3" />
+                            <button 
+                                className="view-all"
+                                onClick={() => {/* Add your action here */}}
+                            >
+                                View All ↗
+                            </button>
+                        </div>
+                    </div>
+                    <div className="carousel-dots">
+                        <span className={`dot ${activeProject === 0 ? 'active' : ''}`}></span>
+                        <span className={`dot ${activeProject === 1 ? 'active' : ''}`}></span>
+                        <span className={`dot ${activeProject === 2 ? 'active' : ''}`}></span>
+                    </div>
+                </div>
             </section>
         </div>
     );
