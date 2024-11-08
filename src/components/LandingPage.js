@@ -48,7 +48,7 @@ const LandingPage = () => {
         setActiveProject(index);
     };
 
-    return (
+        return (
         <div className="main-container" style={{ background: 'transparent' }}>
             <div className="landing-page">
                 <div className="hero-section">
