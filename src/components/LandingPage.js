@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './LandingPage.css';
 import arrow from '../assets/arrow.svg';
-import resume from '../assets/resume.pdf';
+import resume from '../assets/VishnuResume.pdf';
 
 const LandingPage = () => {
     const [typedText, setTypedText] = useState('');
@@ -75,10 +75,10 @@ const LandingPage = () => {
                 </div>
                 <div className="button-container">
                     <a 
-                        href={resume} 
-                        download="YourName_Resume.pdf"
+                        href={resume}
                         className="download-btn"
                         aria-label="Download Resume"
+                        download="VishnuResume.pdf"
                     >
                         Download Resume
                     </a>
