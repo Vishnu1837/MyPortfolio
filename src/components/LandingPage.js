@@ -11,6 +11,10 @@ const LandingPage = () => {
     const typingSpeed = 100;
     const [isExpanded, setIsExpanded] = useState(false);
     const [activeProject, setActiveProject] = useState(0);
+    const [showNotice, setShowNotice] = useState(true);
+    const [isNoticeExpanded, setIsNoticeExpanded] = useState(false);
+    const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+    const [isClicking, setIsClicking] = useState(false);
 
     useEffect(() => {
         let index = 0;
@@ -37,6 +41,34 @@ const LandingPage = () => {
         }
     }, [isTypingComplete]);
 
+    useEffect(() => {
+        if (window.innerWidth <= 768) {
+            setShowNotice(true);
+            setTimeout(() => {
+                setIsNoticeExpanded(true);
+            }, 500);
+        }
+    }, []);
+
+    useEffect(() => {
+        const handleMouseMove = (e) => {
+            setCursorPosition({ x: e.clientX, y: e.clientY });
+        };
+
+        const handleMouseDown = () => setIsClicking(true);
+        const handleMouseUp = () => setIsClicking(false);
+
+        window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('mousedown', handleMouseDown);
+        window.addEventListener('mouseup', handleMouseUp);
+
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('mousedown', handleMouseDown);
+            window.removeEventListener('mouseup', handleMouseUp);
+        };
+    }, []);
+
     const scrollToNextSection = () => {
         const nextSection = document.querySelector('.about-section');
         if (nextSection) {
@@ -50,11 +82,47 @@ const LandingPage = () => {
 
         return (
         <div className="main-container" style={{ background: 'transparent' }}>
+            <div 
+                className="cursor-light"
+                style={{
+                    left: `${cursorPosition.x}px`,
+                    top: `${cursorPosition.y}px`
+                }}
+            />
+            <div 
+                className={`cursor ${isClicking ? 'clicking' : ''}`}
+                style={{
+                    left: `${cursorPosition.x}px`,
+                    top: `${cursorPosition.y}px`
+                }}
+            />
+            <div className="mobile-notice" style={{ display: showNotice && window.innerWidth <= 768 ? 'block' : 'none' }}>
+                <div 
+                    className={`notice-content ${isNoticeExpanded ? 'expanded' : ''}`}
+                    onClick={() => !isNoticeExpanded && setIsNoticeExpanded(true)}
+                >
+                    <i className="info-icon">ⓘ</i>
+                    {isNoticeExpanded && (
+                        <>
+                            <p>For the best experience, please view this page on a desktop, as it has been optimized for larger screens.</p>
+                            <button 
+                                className="notice-close" 
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    setIsNoticeExpanded(false);
+                                }}
+                            >
+                                ×
+                            </button>
+                        </>
+                    )}
+                </div>
+            </div>
             <div className="landing-page">
                 <div className="hero-section">
                     <h1>
                         Hi! I'm <span className="gradient-text">Vishnu</span>,{' '}
-                        <span style={{ display: 'inline-block', minWidth: '250px', textAlign: 'left', whiteSpace: 'nowrap' }}>
+                        <span className="typing-text-container">
                             {typedText}
                             <span className="blinking-cursor" aria-hidden="true">
                                 {showCursor && '|'}
@@ -80,7 +148,7 @@ const LandingPage = () => {
                         aria-label="Download Resume"
                         download="VishnuResume.pdf"
                     >
-                        Download Resume
+                        <span>Download Resume</span>
                     </a>
                 </div>
             </div>
